@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+/* Generado desde content/theme.json — no editar a mano. */
+:root {
+  --color-bg: #ebebeb;
+  --color-surface: #ebebeb;
+  --color-text: #201f1d;
+  --color-accent: #b68235;
+  --color-accent-2: #ae874c;
+  --color-divider: color-mix(in srgb, #201f1d 16%, transparent);
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e8e8e8;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #b7b7b7;
+  --color-neutral-500: #989898;
+  --color-neutral-600: #7a7a7a;
+  --color-neutral-700: #5d5d5d;
+  --color-neutral-800: #424242;
+  --color-neutral-900: #2b2b2b;
+  --color-accent-100: #fff3e4;
+  --color-accent-200: #ffe3bf;
+  --color-accent-300: #facb8d;
+  --color-accent-400: #e1ad66;
+  --color-accent-500: #c28d41;
+  --color-accent-600: #a06f24;
+  --color-accent-700: #7d5411;
+  --color-accent-800: #5a3b0a;
+  --color-accent-900: #3a270d;
+  --color-accent-2-100: #fdf4e7;
+  --color-accent-2-200: #fbe4c4;
+  --color-accent-2-300: #f1ce9c;
+  --color-accent-2-400: #d7b077;
+  --color-accent-2-500: #b89156;
+  --color-accent-2-600: #98733b;
+  --color-accent-2-700: #765727;
+  --color-accent-2-800: #553e1a;
+  --color-accent-2-900: #372914;
+  --font-heading: "Libre Baskerville", system-ui, sans-serif;
+  --font-heading-weight: 700;
+  --font-body: "Open Sans", system-ui, sans-serif;
+  --space-1: 4.6px;
+  --space-2: 9.2px;
+  --space-3: 13.8px;
+  --space-4: 18.4px;
+  --space-6: 27.6px;
+  --space-8: 36.8px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 7px;
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2b2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2b2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2b2b2b 22%, transparent);
+  --marca-tamano: 32px;
+  --marca-tamano-movil: 26px;
+  --ancho-maximo: 1200px;
+}
+
+/* Variantes de las secciones dinámicas */
+.split.split-sin-imagen { grid-template-columns: minmax(0, 1fr); }
+.split.split-invertido { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
+.split.split-portrait.split-invertido { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); }
+@media (max-width: 760px) { .split.split-invertido, .split.split-portrait.split-invertido { grid-template-columns: 1fr; } }
+.contact-grid.contact-grid-solo { grid-template-columns: minmax(0, 1fr); }
+.contact-grid-solo .stack { max-width: 520px; }
