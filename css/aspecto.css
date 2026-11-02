@@ -1,0 +1,205 @@
+/* ==========================================================================
+   aspecto.css — aspecto del mockup aprobado por Paula (23/10/2026)
+   Referencia: mockups/boton-whatsapp/mockup-completo.html y mockups/COMPARACION_*.md
+   Se carga DESPUÉS de classical.css, site.css y theme.css, y solo sobrescribe.
+   Para volver al aspecto anterior basta con quitar su <link> en templates/layout.js.
+   Los colores y la letra salen del tema (theme.json): aquí solo hay formas y espacios.
+   ========================================================================== */
+
+:root {
+  --blanco: #fff;
+  --tinta-suave: color-mix(in srgb, var(--color-text) 72%, var(--color-bg));
+  --borde-suave: var(--color-accent-2);
+  --sombra-tarjeta: 0 2px 10px rgba(0, 0, 0, .05);
+  --margen-lateral: 16px;  /* como el mockup */
+}
+
+body { font-size: 16px; line-height: 1.65; }
+.wrap { padding-inline: var(--margen-lateral); }
+
+/* --- Cabecera ---------------------------------------------------------- */
+.site-header { background: var(--blanco); backdrop-filter: none; border-bottom: 1px solid var(--borde-suave); }
+.site-header .nav { padding: 14px var(--margen-lateral); }
+.nav a.nav-brand { font-family: Georgia, "Times New Roman", serif; font-weight: 400; color: var(--color-text); }
+.nav a { font-size: 15px; color: var(--color-text); }
+.nav a[aria-current='page'] { color: var(--color-accent); font-weight: 600; }
+
+/* --- Títulos y textos --------------------------------------------------- */
+h1, h2, h3, .page-title, .card-title { font-weight: 600; line-height: 1.25; text-wrap: balance; }
+h1, .page-title { font-size: clamp(28px, 6vw, 42px); margin: 0 0 16px; }
+.page-title { max-width: none !important; }  /* sin el límite de ancho de la web anterior: el título en una línea si cabe */
+h2 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 16px; }
+h3, .card-title { font-size: 18px; margin: 0 0 8px; }
+.kicker, .card-kicker { font-size: 12px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 8px; }
+.lead, .text, .card-body { font-size: 16px; line-height: 1.65; opacity: 1; margin: 0 0 14px; max-width: none !important; }
+
+/* Títulos y subtítulos por sección: data-titulos="centro" | "izquierda" (lo pone templates/index.js).
+   Como en el mockup, el título grande de cada página (h1) va siempre a la izquierda. */
+section[data-titulos="centro"] :is(.kicker, .card-kicker, h2, h3, .card-title, .step-num) { text-align: center; }
+
+/* Formato del texto por sección: data-texto="justificado" (por defecto) | "auto" | "izquierda".
+   justificado = también en móvil; auto = justificado en pantallas anchas y a la izquierda en móvil.
+   Siempre con guiones y la última línea a la izquierda. */
+/* Los puntos de corte van dentro del texto (templates/silabas.js, guiones suaves): valen en todos los navegadores.
+   hyphens: auto deja además que el navegador parta por su cuenta (Safari antiguo solo entiende -webkit-hyphens). */
+section[data-texto] :is(p, li) { -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 5 2 2; }
+section[data-texto="izquierda"] p { text-align: left; }
+section[data-texto="justificado"] p { text-align: justify; text-align-last: left; }  /* en todos los tamaños, también en móvil */
+@media (min-width: 720px) {
+  section[data-texto="auto"] p { text-align: justify; text-align-last: left; }
+}
+/* Formato propio de un párrafo (marca [[…]] en el texto, 31/10/2026): manda sobre el de su sección */
+section[data-texto] p[data-texto="justificado"] { text-align: justify; text-align-last: left; }
+section[data-texto] p[data-texto="izquierda"],
+section[data-texto] p[data-texto="auto"] { text-align: left; text-align-last: auto; }
+@media (min-width: 720px) {
+  section[data-texto] p[data-texto="auto"] { text-align: justify; text-align-last: left; }
+}
+
+/* --- Secciones y espacios ---------------------------------------------- */
+.hero, .page-head, .section { padding-block: 40px; }
+.section-last { padding-bottom: 56px; }
+.hero { border-bottom: 0; }
+.btn-row { margin-top: 20px; gap: 12px; }
+
+/* Separadores decorativos (sección «separador», símbolos editables) */
+.separador { text-align: center; color: var(--color-accent); letter-spacing: .5em; font-size: 18px; margin-block: 8px; }
+
+/* --- Botones: pastilla; primario relleno, secundario y fantasma con borde --- */
+.btn { border-radius: 999px; padding: 12px 20px; font-family: inherit; font-weight: 600; font-size: 15px; border: 2px solid var(--color-accent); color: var(--color-accent); background: transparent; }
+.btn-primary { background: var(--color-accent); color: var(--blanco); }
+.btn-primary:hover, .btn-primary:active { background: color-mix(in srgb, var(--color-accent) 85%, black); color: var(--blanco); }
+.btn-secondary, .btn-ghost { background: transparent; color: var(--color-accent); border-color: var(--color-accent); padding-inline: 20px; }
+.btn-secondary:hover, .btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--color-accent); }
+.nav-toggle.btn { border: 1px solid var(--borde-suave); border-radius: 8px; width: 44px; height: 40px; padding: 0; color: var(--color-text); background: transparent; }
+
+/* --- Fotos -------------------------------------------------------------- */
+.plate { filter: none; }  /* foto original, sin el tono sepia de classical.css */
+.hero-con-foto .plate, .split-portrait .plate {
+  width: min(260px, 70vw); aspect-ratio: 1 / 1; border-radius: 50%; overflow: hidden;
+  border: 8px solid var(--blanco); outline: 0; box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+  background: var(--borde-suave); margin-inline: auto;
+}
+.hero-con-foto .plate img, .split-portrait .plate img { width: 100%; height: 100%; object-fit: cover; }
+/* Encuadre (media.json): zoom y punto de enfoque */
+.plate.encuadrada img { object-position: var(--fx, 50%) var(--fy, 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--fx, 50%) var(--fy, 50%); }
+
+/* Portada con foto: texto a la izquierda, foto a la derecha; en móvil, la foto debajo */
+.hero-con-foto { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 720px) { .hero-con-foto { grid-template-columns: 1.2fr .8fr; } }
+
+/* Sobre mí: igual que la portada; texto a la izquierda y foto en círculo a la derecha, centradas en altura.
+   En móvil, la foto debajo del texto. */
+.split.split-portrait { gap: 32px; align-items: center; }
+@media (min-width: 720px) {
+  .split.split-portrait { grid-template-columns: 1.2fr .8fr; }
+  .split.split-portrait.split-invertido { grid-template-columns: .8fr 1.2fr; }
+}
+/* El primer párrafo («¡Hola! Soy Paula…»), algo destacado */
+.split-portrait .page-title + .lead { font-size: 20px; font-weight: 600; line-height: 1.4; text-align: left !important; text-align-last: left !important; }
+
+/* --- Tarjetas ----------------------------------------------------------- */
+.grid { gap: 16px; }
+.grid-260 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--blanco); border: 0; border-radius: 16px; padding: 20px; gap: 0; box-shadow: var(--sombra-tarjeta); }
+.card:hover { border-color: transparent; transform: none; }
+.card-meta { margin-top: 4px; }
+.card-meta .tag { font-size: 12px; color: var(--color-accent); background: transparent; border: 1px solid var(--borde-suave); border-radius: 999px; padding: 2px 10px; }
+
+/* Especialidades (presentación «areas»): bloque con fondo suave y lista con línea a la izquierda */
+.seccion-areas {
+  background: var(--color-surface); border-radius: 24px; box-sizing: border-box;
+  width: calc(100% - 2 * var(--margen-lateral)); max-width: calc(var(--ancho-maximo, 880px) - 2 * var(--margen-lateral));
+  padding-inline: 20px;
+}
+.grid-areas { grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 720px) { .grid-areas { grid-template-columns: 1fr 1fr; } }
+.grid-areas .card { background: transparent; box-shadow: none; border-radius: 0; border-left: 3px solid var(--borde-suave); padding: 4px 0 4px 16px; }
+
+/* Presentación «lista» (p. ej. Duración y precio): etiqueta en mayúsculas y su texto debajo */
+.lista-datos { margin: 0; }
+.lista-datos dt { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-top: 14px; }
+.lista-datos dt:first-child { margin-top: 0; }
+.lista-datos dd { margin: 4px 0 0; }
+.lista-datos dd p { margin: 0; }
+
+/* --- Cierres (CTA): bloque del color de acento con texto blanco ---------- */
+.cta { background: var(--color-accent); color: var(--blanco); border: 0; border-radius: 20px; padding: 40px 24px; text-align: center; }
+.cta h3 { font-size: clamp(22px, 4vw, 30px); color: var(--blanco); margin: 0 0 16px; }
+.cta p, .cta .text { color: var(--blanco); margin-top: 0; }.cta .btn { background: var(--blanco); color: var(--color-accent); border-color: var(--blanco); margin-top: 20px; }
+
+/* --- Formación (lista): título como etiqueta y tarjeta blanca con viñetas --- */
+.lista-titulo { font-size: 12px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 8px; }
+.checklist { display: block; list-style: disc; max-width: none; margin: 16px 0 0; padding: 20px 20px 20px 40px; background: var(--blanco); border-radius: 16px; box-shadow: var(--sombra-tarjeta); }
+.checklist li { display: list-item; font-size: 16px; }
+.checklist svg { display: none; }
+
+/* --- Pasos (Metodología): tarjetas numeradas, dos por dos en pantallas anchas --- */
+.steps { border: 0; display: grid; gap: 16px; }
+@media (min-width: 720px) { .steps { grid-template-columns: 1fr 1fr; } }
+.step { display: block; background: var(--blanco); border: 0; border-radius: 16px; padding: 20px; box-shadow: var(--sombra-tarjeta); }
+.step-num { display: block; font-family: inherit; font-size: 28px; font-weight: 600; line-height: 1.1; letter-spacing: .04em; color: var(--color-accent); margin-bottom: 8px; }
+.step h2 { font-size: 18px; margin: 0 0 8px; }
+.step p { font-size: 16px; opacity: 1; max-width: none; }
+
+/* --- Preguntas frecuentes ---------------------------------------------- */
+.wrap-narrow { max-width: var(--ancho-maximo, 912px); }  /* mismo ancho que el resto de secciones */
+details.card { padding: 14px 18px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, .05); }
+details summary { font-family: inherit; font-size: 16px; font-weight: 600; }
+details p { font-size: 16px; opacity: 1; margin-top: 10px; }
+
+/* --- Contacto ----------------------------------------------------------- */
+.contact-grid { grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 720px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+.form { background: var(--blanco); border-radius: 16px; padding: 20px; gap: 12px; }
+.form .field > label { font-size: 14px; }
+.input { font-size: 16px; padding: 10px 12px; border: 1px solid var(--borde-suave); border-radius: 8px; background: var(--color-bg); }
+.contact-list svg, .contact-item svg { stroke: var(--color-accent); }
+
+/* --- Pie: bloque centrado con fondo suave -------------------------------- */
+.site-footer { display: block; text-align: center; background: var(--color-surface); border-top: 0; margin-top: 40px; padding: 40px 20px 12px; color: var(--tinta-suave); font-size: 14px; }
+.footer-brand { font-family: inherit; font-weight: 700; font-size: 14px; color: var(--color-text); margin-bottom: 0 !important; }
+.footer-tag { max-width: none; opacity: 1; font-size: 14px; }
+.footer-contact { justify-items: center; gap: 0; margin-top: 12px; }
+.footer-contact a { color: var(--tinta-suave); }
+.footer-contact span { opacity: 1; }
+.footer-legal { text-align: center; background: var(--color-surface); color: var(--tinta-suave); font-size: 12px; padding-block: 12px 40px; }
+
+/* --- Botón flotante de WhatsApp (templates/layout.js, content/whatsapp.json) --- */
+.wa-flotante {
+  --wa-verde: #0a6e61;  /* verde oscuro del mockup: con texto blanco, contraste 6,15 */
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
+  transform: translateY(calc(var(--p, 0) * -40px));
+  transition: transform .15s linear;
+}
+.wa-boton {
+  width: 60px; height: 60px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--wa-verde); color: var(--blanco);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .22);
+  display: grid; place-items: center;
+}
+.wa-boton:focus-visible { outline: 3px solid var(--wa-verde); outline-offset: 3px; }
+.wa-chat {
+  position: absolute; right: 0; bottom: 76px;
+  width: min(320px, calc(100vw - 32px));
+  background: var(--color-bg); border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .25); overflow: hidden;
+  opacity: 0; visibility: hidden; transform: translateY(8px) scale(.98);
+  transition: opacity .2s, transform .2s, visibility .2s;
+}
+.wa-chat.is-open { opacity: 1; visibility: visible; transform: none; }
+.wa-cabecera { background: var(--wa-verde); color: var(--blanco); display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; }
+.wa-cabecera strong { font-size: 17px; }
+.wa-cerrar { background: rgba(0, 0, 0, .2); color: var(--blanco); border: 0; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; cursor: pointer; }
+.wa-cuerpo { padding: 16px; }
+.wa-burbuja { background: var(--blanco); border-radius: 12px 12px 12px 2px; padding: 12px 14px; font-size: 15px; box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+.wa-enlace { display: block; margin: 14px 0 0 auto; width: max-content; background: var(--wa-verde); color: var(--blanco); text-decoration: none; padding: 10px 16px; border-radius: 20px; font-weight: 600; font-size: 15px; }
+.wa-enlace:hover { color: var(--blanco); }
+@media (min-width: 900px) { .wa-oculto-escritorio { display: none; } }
+@media (max-width: 899px) { .wa-oculto-movil { display: none; } }
+@media (prefers-reduced-motion: reduce) { .wa-flotante, .wa-chat { transition: none; } }
+/* Espacio al final de la página para que el botón no tape el pie */
+.footer-legal { padding-bottom: 100px; }
