@@ -1,0 +1,45 @@
+/* Aviso de cookies. Se carga después de aspecto.css y solo si el generador lo activa. */
+.cookies {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1100;
+  background: var(--blanco, var(--color-bg)); color: var(--color-text);
+  border-top: 1px solid var(--borde-suave, var(--color-divider));
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, .12);
+  padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.cookies[hidden] { display: none; }
+.cookies-in { max-width: var(--ancho-maximo, 912px); margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.cookies-in[hidden] { display: none; }
+.cookies-texto { flex: 1 1 320px; }
+.cookies p { margin: 0; font-size: 14px; line-height: 1.5; }
+.cookies p + p { margin-top: 4px; }
+.cookies .cookies-titulo { font-weight: 700; font-size: 15px; }
+.cookies a { color: var(--color-accent); text-decoration: underline; }
+.cookies-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.cookies-botones .btn { padding: 9px 18px; font-size: 14px; }
+.cookies-enlace { background: none; border: 0; padding: 9px 4px; font: inherit; font-size: 14px; color: var(--color-accent); text-decoration: underline; cursor: pointer; }
+.cookies-fila { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; font-size: 14px; line-height: 1.5; cursor: pointer; }
+.cookies-fila input { flex: none; width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--color-accent); }
+.cookies button:focus-visible, .cookies input:focus-visible, .cookies a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+.cookies-abrir { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
+.cookies-abrir:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+/* El botón de WhatsApp sube lo que mida el aviso para no quedar tapado */
+.wa-flotante { bottom: calc(16px + var(--cookies-alto, 0px) + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 560px) {
+  .cookies-botones { width: 100%; }
+  .cookies-botones .btn { flex: 1 1 0; text-align: center; }
+  .cookies-enlace { flex: 1 0 100%; text-align: center; order: 3; }
+  .cookies-config .cookies-botones { flex-direction: column; align-items: stretch; }
+  .cookies-config .cookies-botones .btn { flex: none; }
+}
+
+/* Página de la política de cookies */
+.politica { padding-top: 0; }
+.politica h2 { font-size: 20px; margin: 28px 0 10px; }
+.politica p, .politica li { font-size: 16px; line-height: 1.65; text-align: left; hyphens: none; }
+.politica ul { padding-left: 22px; }
+.politica code { font-size: .92em; background: var(--color-surface); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.politica-fecha { font-size: 14px; color: var(--tinta-suave, inherit); margin: 0; }
+.politica-tabla { overflow-x: auto; margin: 14px 0; }
+.politica-tabla table { border-collapse: collapse; width: 100%; font-size: 15px; }
+.politica-tabla th, .politica-tabla td { border: 1px solid var(--borde-suave, var(--color-divider)); padding: 8px 12px; text-align: left; vertical-align: top; }
+.politica-tabla th { background: var(--color-surface); }
